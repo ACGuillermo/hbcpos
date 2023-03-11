@@ -12,7 +12,7 @@ type SideNavigationItem = {
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
 };
 
-export const SideNavigation = () => {
+export const SideNavigation = ({ isOpen }: { isOpen: boolean }) => {
   const router = useRouter();
   const navigation: SideNavigationItem[] = [
     { name: 'Dashboard', to: '/', icon: HomeIcon },
@@ -31,11 +31,11 @@ export const SideNavigation = () => {
         >
           {item.icon && (
             <item.icon
-              className="mr-4 h-6 w-6 flex-shrink-0"
+              className={`h-6 w-6 flex-shrink-0 ${isOpen ? 'mr-4' : ''}`}
               aria-hidden="true"
             />
           )}
-          {item.name}
+          {isOpen ? item.name : null}
         </Link>
       ))}
     </>

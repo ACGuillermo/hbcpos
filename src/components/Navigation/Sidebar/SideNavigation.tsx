@@ -1,17 +1,23 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import {
+  BanknotesIcon,
+  HomeIcon,
+  UserGroupIcon,
+} from '@heroicons/react/24/solid';
 
 type SideNavigationItem = {
   name: string;
   to: string;
-  icon?: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  icon: React.FC<React.SVGProps<SVGSVGElement>>;
 };
 
 export const SideNavigation = () => {
   const router = useRouter();
   const navigation: SideNavigationItem[] = [
-    { name: 'Dashboard', to: '/' },
-    { name: 'Sale', to: '/sales' },
+    { name: 'Dashboard', to: '/', icon: HomeIcon },
+    { name: 'Sale', to: '/sales', icon: BanknotesIcon },
+    { name: 'Clients', to: '/clients', icon: UserGroupIcon },
   ];
   return (
     <>
@@ -23,6 +29,12 @@ export const SideNavigation = () => {
             router.pathname === item.to ? 'bg-white/10' : ''
           }`}
         >
+          {item.icon && (
+            <item.icon
+              className="mr-4 h-6 w-6 flex-shrink-0"
+              aria-hidden="true"
+            />
+          )}
           {item.name}
         </Link>
       ))}

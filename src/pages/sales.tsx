@@ -1,11 +1,11 @@
 import { type NextPage } from 'next';
-
+import { SalesSection } from '~/features/sales';
 import { api } from '~/utils/api';
 
-const Home: NextPage = () => {
+const Sales: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: 'from Sales' });
 
-  return <>{hello.data && <h1>{hello.data.greeting}</h1>}</>;
+  return <SalesSection />;
 };
 
-export default Home;
+export default Sales;

@@ -8,9 +8,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <div className="flex h-screen overflow-hidden bg-gray-100">
       <Sidebar />
-      <main className="relative flex-1 overflow-y-auto focus:outline-none">
-        {children}
-      </main>
+      <main className="relative flex-1 focus:outline-none">{children}</main>
     </div>
   );
 };

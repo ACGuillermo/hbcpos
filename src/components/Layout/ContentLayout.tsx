@@ -11,8 +11,8 @@ export const ContentLayout = ({ children, title }: ContentLayoutProps) => {
       <Head>
         <title>{title}</title>
       </Head>
-      <div className="mb-10 h-screen bg-gray-100 py-2">
-        <div className="mx-2 pb-4">{children}</div>
+      <div className="mb-10 h-screen bg-gray-100 pt-2">
+        <div className="mx-2">{children}</div>
       </div>
     </>
   );

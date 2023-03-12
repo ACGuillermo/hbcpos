@@ -1,5 +1,7 @@
 import { ProductCard } from './ProductCard';
 import { type Product } from '~/types';
+import { useShoppingCartContext } from '~/stores/ShoppingCart';
+import React from 'react';
 
 const list: Product[] = [
   {
@@ -67,12 +69,19 @@ const list: Product[] = [
   },
 ];
 
-export const ProductList = () => {
+export const ProductList = React.memo(() => {
+  const { increaseProductQuantity } = useShoppingCartContext();
   return (
-    <div className="mt-2 grid grid-cols-3 gap-y-10 gap-x-4 lg:grid-cols-3 xl:grid-cols-5">
+    <div className="mt-2 grid h-full grid-cols-3 gap-y-10 gap-x-4 overflow-y-scroll pb-4 lg:grid-cols-4">
       {list.map((product) => (
-        <ProductCard key={product.id} product={product} />
+        <ProductCard
+          key={product.id}
+          product={product}
+          increaseProductQuantity={increaseProductQuantity}
+        />
       ))}
     </div>
   );
-};
+});
+
+ProductList.displayName = 'ProductList';

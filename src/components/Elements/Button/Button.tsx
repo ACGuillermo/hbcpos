@@ -6,11 +6,9 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 // TODO: style the button properly
 const variants = {
-  primary:
-    'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded',
-  secondary:
-    'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded',
-  danger: 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded',
+  primary: 'bg-gray-800 hover:bg-gray-900 text-white font-bold rounded-md',
+  secondary: 'bg-gray-500 hover:bg-gray-700 text-white font-bold rounded-md',
+  danger: 'bg-red-500 hover:bg-red-700 text-white font-bold rounded-md',
 };
 
 const sizes = {
@@ -29,7 +27,7 @@ export const Button = ({
   return (
     <button
       disabled={isLoading}
-      className={`flex items-center justify-center rounded-md border border-gray-300 font-medium shadow-sm hover:opacity-80 focus:outline-none disabled:cursor-not-allowed disabled:opacity-70 ${className} ${variants[variant]} ${sizes[size]}`}
+      className={`flex items-center justify-center rounded-md border border-gray-300 font-medium shadow-sm focus:outline-none disabled:cursor-not-allowed disabled:opacity-70 ${className} ${variants[variant]} ${sizes[size]}`}
       {...props}
     >
       {props.children}

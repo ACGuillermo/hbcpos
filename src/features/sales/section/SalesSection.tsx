@@ -5,10 +5,12 @@ import { ProductList } from '../components';
 export const SalesSection = () => {
   return (
     <ContentLayout title="Sales">
-      <ProductList />
-      <Button variant="danger" size="lg">
-        Test button
-      </Button>
+      <div className="grid grid-cols-12">
+        <div className="col-span-12 lg:col-span-10">
+          <ProductList />
+        </div>
+        <div className="md:hidden">hello</div>
+      </div>
     </ContentLayout>
   );
 };

@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@headlessui/react': ^1.7.13
   '@heroicons/react': ^2.0.16
   '@tailwindcss/line-clamp': ^0.4.2
   '@tanstack/react-query': ^4.20.2
@@ -31,6 +32,7 @@ specifiers:
   zod: ^3.20.6
 
 dependencies:
+  '@headlessui/react': 1.7.13_biqbaboplfbrettd7655fr4n2y
   '@heroicons/react': 2.0.16_react@18.2.0
   '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.7
   '@tanstack/react-query': 4.26.1_biqbaboplfbrettd7655fr4n2y
@@ -107,6 +109,18 @@ packages:
     resolution: {integrity: sha512-lxJ9R5ygVm8ZWgYdUweoq5ownDlJ4upvoWmO4eLxBYHdMo+vZ/Rx0EN6MbKWDJOSUGrqJy2Gt+Dyv/VKml0fjg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
+
+  /@headlessui/react/1.7.13_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-9n+EQKRtD9266xIHXdY5MfiXPDfYwl7zBM7KOx2Ae3Gdgxy8QML1FkCMjq6AsOf0l6N9uvI4HcFtuFlenaldKg==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: ^16 || ^17 || ^18
+      react-dom: ^16 || ^17 || ^18
+    dependencies:
+      client-only: 0.0.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /@heroicons/react/2.0.16_react@18.2.0:
     resolution: {integrity: sha512-x89rFxH3SRdYaA+JCXwfe+RkE1SFTo9GcOkZettHer71Y3T7V+ogKmfw5CjTazgS3d0ClJ7p1NA+SP7VQLQcLw==}

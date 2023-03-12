@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Button } from '~/components/Elements';
+import { ConfirmationModal } from '~/components/Elements/ConfirmationModal';
 import { type CartProduct } from '~/types';
 
 interface CartBillProps {
@@ -41,14 +41,34 @@ export const CartBill: React.FC<CartBillProps> = ({ cartProducts }) => {
               {subtotal.toFixed(2)} €
             </p>
           </div>
-          <Link
-            href="/payment"
-            className="-mt-2 flex h-10 items-center rounded-md"
-          >
-            <Button variant="primary" size="md" className="w-full">
-              Continuar
-            </Button>
-          </Link>
+          <div className="-mt-2 flex h-10 items-center rounded-md">
+            <ConfirmationModal
+              icon="danger"
+              title="Delete User"
+              isDone={false}
+              triggerButton={
+                <Button variant="primary" size="md" className="w-full">
+                  Delete
+                </Button>
+              }
+              confirmButton={
+                <Button
+                  type="button"
+                  variant="primary"
+                  size="md"
+                  className="bg-red-600"
+                  onClick={() => console.log('delete')}
+                >
+                  <div>Delete User</div>
+                </Button>
+              }
+            >
+              <p className="text-sm text-gray-500">
+                All of your data will be permanently removed from our servers
+                forever. This action cannot be undone.
+              </p>
+            </ConfirmationModal>
+          </div>
         </div>
       </div>
     </div>

@@ -1,3 +1,5 @@
+import React from 'react';
+
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: keyof typeof variants;
   size?: keyof typeof sizes;
@@ -17,20 +19,28 @@ const sizes = {
   lg: 'py-3 px-8 text-lg',
 };
 
-export const Button = ({
-  variant = 'primary',
-  size = 'sm',
-  isLoading = false,
-  className = '',
-  ...props
-}: ButtonProps) => {
-  return (
-    <button
-      disabled={isLoading}
-      className={`flex items-center justify-center rounded-md border border-gray-300 font-medium shadow-sm focus:outline-none disabled:cursor-not-allowed disabled:opacity-70 ${className} ${variants[variant]} ${sizes[size]}`}
-      {...props}
-    >
-      {props.children}
-    </button>
-  );
-};
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      variant = 'primary',
+      size = 'sm',
+      isLoading = false,
+      className = '',
+      ...props
+    },
+    ref,
+  ) => {
+    return (
+      <button
+        ref={ref}
+        disabled={isLoading}
+        className={`flex items-center justify-center rounded-md border border-gray-300 font-medium shadow-sm focus:outline-none disabled:cursor-not-allowed disabled:opacity-70 ${className} ${variants[variant]} ${sizes[size]}`}
+        {...props}
+      >
+        {props.children}
+      </button>
+    );
+  },
+);
+
+Button.displayName = 'Button';

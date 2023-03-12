@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import React from 'react';
-import { useShoppingCartContext } from '~/stores/ShoppingCart';
 import { type Product } from '~/types';
 
 type ProductCardProps = {

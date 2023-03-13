@@ -37,7 +37,12 @@ export const CheckoutModal = ({
   return (
     <>
       {trigger}
-      <Dialog isOpen={isOpen} onClose={close} initialFocus={addButtonRef}>
+      <Dialog
+        isOpen={isOpen}
+        onClose={close}
+        initialFocus={addButtonRef}
+        size="md"
+      >
         <div className="sm:flex sm:items-start">
           {/* ICON */}
           <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">

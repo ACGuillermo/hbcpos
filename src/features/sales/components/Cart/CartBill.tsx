@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '~/components/Elements';
 import { ConfirmationModal } from '~/components/Elements/ConfirmationModal';
 import { type CartProduct } from '~/types';
+import { CheckoutModal } from './CheckoutModal';
 
 interface CartBillProps {
   cartProducts: CartProduct[];
@@ -41,10 +42,10 @@ export const CartBill: React.FC<CartBillProps> = ({ cartProducts }) => {
           </p>
         </div>
         <div className="-mt-2 flex h-10 items-center rounded-md">
-          <ConfirmationModal
-            icon="danger"
-            title="Delete User"
+          <CheckoutModal
+            title="Select Payment Method"
             isDone={false}
+            body={<p>Select payment</p>}
             triggerButton={
               <Button
                 variant="primary"
@@ -55,24 +56,33 @@ export const CartBill: React.FC<CartBillProps> = ({ cartProducts }) => {
                 Checkout
               </Button>
             }
-            confirmButton={
-              <Button
-                type="button"
-                variant="primary"
-                size="md"
-                className="bg-red-600"
-                onClick={() => console.log('delete')}
-              >
-                Delete User
-              </Button>
-            }
-          >
-            <p className="text-sm text-gray-500">
-              All of your data will be permanently removed from our servers
-              forever. This action cannot be undone.
-            </p>
-          </ConfirmationModal>
+          />
         </div>
+        <ConfirmationModal
+          title="Empty Cart"
+          isDone={false}
+          body={'Are you sure you want to empty your cart?'}
+          triggerButton={
+            <Button
+              variant="danger"
+              size="md"
+              className="w-full"
+              disabled={cartProducts.length <= 0}
+            >
+              Empty Cart
+            </Button>
+          }
+          confirmButton={
+            <Button
+              variant="danger"
+              size="md"
+              disabled={cartProducts.length <= 0}
+            >
+              Empty Cart
+            </Button>
+          }
+          icon="danger"
+        />
       </div>
     </div>
   );

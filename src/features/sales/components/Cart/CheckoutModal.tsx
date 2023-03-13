@@ -10,25 +10,19 @@ import { useDisclosure } from '~/hooks/useDisclosure';
 
 export type ConfirmationDialogProps = {
   triggerButton: React.ReactElement;
-  confirmButton: React.ReactElement;
   title: string;
-  cancelButtonText?: string;
-  icon?: 'danger' | 'info';
   isDone?: boolean;
-  body?: string;
+  body?: React.ReactElement;
 };
-export const ConfirmationModal = ({
+export const CheckoutModal = ({
   triggerButton,
-  confirmButton,
   title,
-  cancelButtonText = 'Cancel',
-  icon = 'danger',
   isDone = false,
   body,
 }: ConfirmationDialogProps) => {
   const { close, open, isOpen } = useDisclosure();
 
-  const cancelButtonRef = React.useRef(null);
+  const addButtonRef = React.useRef(null);
 
   React.useEffect(() => {
     if (isDone) {
@@ -43,30 +37,9 @@ export const ConfirmationModal = ({
   return (
     <>
       {trigger}
-      <Dialog
-        isOpen={isOpen}
-        onClose={close}
-        initialFocus={cancelButtonRef}
-        size="md"
-      >
+      <Dialog isOpen={isOpen} onClose={close} initialFocus={addButtonRef}>
         <div className="sm:flex sm:items-start">
-          {icon === 'danger' && (
-            <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-              <ShieldExclamationIcon
-                className="h-6 w-6 text-red-600"
-                aria-hidden="true"
-              />
-            </div>
-          )}
-
-          {icon === 'info' && (
-            <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
-              <InformationCircleIcon
-                className="h-6 w-6 text-blue-600"
-                aria-hidden="true"
-              />
-            </div>
-          )}
+          {/* ICON */}
           <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
             <DialogTitle
               as="h3"
@@ -74,9 +47,7 @@ export const ConfirmationModal = ({
             >
               {title}
             </DialogTitle>
-            <div className="mt-2">
-              {body !== null && <p className="text-sm text-gray-500">{body}</p>}
-            </div>
+            <div className="mt-2">hello</div>
           </div>
         </div>
 
@@ -86,11 +57,10 @@ export const ConfirmationModal = ({
             variant="primary"
             className="inline-flex w-full justify-center rounded-md border focus:ring-1 focus:ring-indigo-500 focus:ring-offset-1 sm:mt-0 sm:w-auto sm:text-sm"
             onClick={close}
-            ref={cancelButtonRef}
+            ref={addButtonRef}
           >
-            {cancelButtonText}
+            Pay
           </Button>
-          {confirmButton}
         </div>
       </Dialog>
     </>

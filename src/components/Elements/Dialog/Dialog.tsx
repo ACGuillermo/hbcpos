@@ -6,17 +6,27 @@ type DialogProps = {
   onClose: () => void;
   children: React.ReactNode;
   initialFocus?: React.MutableRefObject<null>;
+  size?: keyof typeof sizes;
+  className?: string;
 };
 
 export const DialogTitle = UIDialog.Title;
 
 export const DialogDescription = UIDialog.Description;
 
+const sizes = {
+  sm: 'w-1/2 lg:w-1/3 xl:w-2/5 max-w-lg',
+  md: 'w-2/5 lg:w-2/3 xl:w-1/2 max-w-xl',
+  lg: 'w-4/5 lg:w-3/4 xl:w-1/2 max-w-2xl',
+};
+
 export const Dialog: React.FC<DialogProps> = ({
   isOpen,
   onClose,
   children,
   initialFocus,
+  size,
+  className = '',
 }) => {
   return (
     <>
@@ -29,7 +39,7 @@ export const Dialog: React.FC<DialogProps> = ({
           onClose={onClose}
           initialFocus={initialFocus}
         >
-          <div className="px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+          <div className="w-full px-4 pt-4 pb-20 text-center sm:block sm:p-0">
             <Transition.Child
               as={React.Fragment}
               enter="ease-out duration-300"
@@ -51,7 +61,11 @@ export const Dialog: React.FC<DialogProps> = ({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <div className="inline-block transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6 sm:align-middle">
+              <div
+                className={`inline-block transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all sm:my-8 sm:p-6 sm:align-middle ${
+                  size ? sizes[size] : ''
+                } ${className}`}
+              >
                 {children}
               </div>
             </Transition.Child>

@@ -1,4 +1,10 @@
-import React, { useCallback, useContext, useState, useMemo } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useState,
+  useMemo,
+  useEffect,
+} from 'react';
 import { type CartProduct, type Product } from '~/types';
 
 interface ShoppingCartProviderProps {
@@ -10,6 +16,7 @@ interface ShoppingCartContextProps {
   increaseProductQuantity: (item: Product) => void;
   drecreaseProductQuantity: (item: Product) => void;
   removeFromCart: (item: Product) => void;
+  deleteCart: () => void;
 }
 
 const ShoppingCartContext = React.createContext({} as ShoppingCartContextProps);
@@ -22,6 +29,19 @@ export const ShoppingCartProvider = ({
   children,
 }: ShoppingCartProviderProps) => {
   const [cartProducts, setCartProducts] = useState<CartProduct[]>([]);
+
+  useEffect(() => {
+    const localCart = window.localStorage.getItem('cart-hbc');
+
+    if (localCart) {
+      if (localCart === '[]') return;
+      setCartProducts(JSON.parse(localCart) as CartProduct[]);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('cart-hbc', JSON.stringify(cartProducts));
+  }, [cartProducts]);
 
   const increaseProductQuantity = useCallback(
     (product: Product) => {
@@ -60,18 +80,24 @@ export const ShoppingCartProvider = ({
     [setCartProducts],
   );
 
+  const deleteCart = useCallback(() => {
+    setCartProducts([]);
+  }, [setCartProducts]);
+
   const value = useMemo(
     () => ({
       cartProducts,
       increaseProductQuantity,
       drecreaseProductQuantity,
       removeFromCart,
+      deleteCart,
     }),
     [
       cartProducts,
       increaseProductQuantity,
       drecreaseProductQuantity,
       removeFromCart,
+      deleteCart,
     ],
   );
 

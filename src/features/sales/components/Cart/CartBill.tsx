@@ -43,9 +43,7 @@ export const CartBill: React.FC<CartBillProps> = ({ cartProducts }) => {
         </div>
         <div className="-mt-2 flex h-10 items-center rounded-md">
           <CheckoutModal
-            title="Select Payment Method"
             isDone={false}
-            body={<p>Select payment</p>}
             triggerButton={
               <Button
                 variant="primary"

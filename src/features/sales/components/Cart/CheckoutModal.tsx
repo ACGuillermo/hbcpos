@@ -1,7 +1,4 @@
-import {
-  ShieldExclamationIcon,
-  InformationCircleIcon,
-} from '@heroicons/react/24/solid';
+import { BanknotesIcon, CreditCardIcon } from '@heroicons/react/24/solid';
 import * as React from 'react';
 
 import { Button } from '~/components/Elements/Button';
@@ -10,15 +7,11 @@ import { useDisclosure } from '~/hooks/useDisclosure';
 
 export type ConfirmationDialogProps = {
   triggerButton: React.ReactElement;
-  title: string;
   isDone?: boolean;
-  body?: React.ReactElement;
 };
 export const CheckoutModal = ({
   triggerButton,
-  title,
   isDone = false,
-  body,
 }: ConfirmationDialogProps) => {
   const { close, open, isOpen } = useDisclosure();
 
@@ -41,31 +34,62 @@ export const CheckoutModal = ({
         isOpen={isOpen}
         onClose={close}
         initialFocus={addButtonRef}
-        size="md"
+        className="max-w-lg sm:w-1/2 lg:w-2/5"
       >
-        <div className="sm:flex sm:items-start">
+        <div className="w-full">
           {/* ICON */}
-          <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+          <div className="mx-auto mt-3 w-1/2 text-center sm:mt-0 ">
             <DialogTitle
               as="h3"
-              className="text-lg font-medium leading-6 text-gray-900"
+              className=" text-lg font-medium leading-6 text-gray-900"
             >
-              {title}
+              Métodos de pago
             </DialogTitle>
-            <div className="mt-2">hello</div>
+            <div className="mt-2">
+              <p className="text-sm text-gray-500">
+                Selecciona el método de pago que prefieras.
+              </p>
+            </div>
           </div>
-        </div>
+          <div className="mt-4 flex w-full flex-col">
+            {/* TODO: re-style and extrack to re-usable component */}
+            <label className="inline-flex items-center rounded-full  border-gray-200 border-opacity-60 px-2 py-2">
+              <input
+                type="radio"
+                className="form-radio h-5 w-5 text-indigo-600"
+                name="paymentMethod"
+                value="creditCard"
+              />
+              <CreditCardIcon className="ml-2 h-6 w-6 text-blue-600" />
+              <span className="ml-2 font-light text-gray-700">
+                Tarjeta de crédito
+              </span>
+            </label>
 
-        <div className="mt-4 flex justify-end space-x-2">
-          <Button
-            type="button"
-            variant="primary"
-            className="inline-flex w-full justify-center rounded-md border focus:ring-1 focus:ring-indigo-500 focus:ring-offset-1 sm:mt-0 sm:w-auto sm:text-sm"
-            onClick={close}
-            ref={addButtonRef}
-          >
-            Pay
-          </Button>
+            <label className="mt-4 inline-flex items-center rounded-full border-gray-200 border-opacity-60 px-2 py-2">
+              <input
+                type="radio"
+                className="form-radio h-5 w-5 text-indigo-600"
+                name="paymentMethod"
+                value="cash"
+              />
+              <BanknotesIcon className="ml-2 h-6 w-6 text-green-600" />
+              <span className="ml-2 font-light text-gray-700">Efectivo</span>
+            </label>
+          </div>
+
+          <div className="mt-8 w-full">
+            <Button
+              type="button"
+              variant="primary"
+              size="lg"
+              className="inline-flex w-full justify-center rounded-md border focus:ring-1 focus:ring-indigo-500 focus:ring-offset-1 sm:mt-0  sm:text-sm"
+              onClick={close}
+              ref={addButtonRef}
+            >
+              Continuar
+            </Button>
+          </div>
         </div>
       </Dialog>
     </>

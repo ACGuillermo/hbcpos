@@ -12,7 +12,7 @@ export const ContentLayout = ({ children, title }: ContentLayoutProps) => {
         <title>{title}</title>
       </Head>
       <div className="h-screen bg-gray-100 py-2">
-        <div className="mx-2">{children}</div>
+        <div className="mx-4">{children}</div>
       </div>
     </>
   );

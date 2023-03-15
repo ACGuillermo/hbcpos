@@ -1,24 +1,47 @@
+import { Button } from '~/components/Elements';
 import { useShoppingCartContext } from '~/stores/ShoppingCart';
 import { type CartProduct } from '~/types';
+import {
+  MinusCircleIcon,
+  PlusCircleIcon,
+  TrashIcon,
+} from '@heroicons/react/24/solid';
 
 type CartItemProps = {
   product: CartProduct;
 };
 export const CartItem: React.FC<CartItemProps> = ({ product }) => {
-  const { drecreaseProductQuantity, increaseProductQuantity } =
+  const { drecreaseProductQuantity, increaseProductQuantity, removeFromCart } =
     useShoppingCartContext();
   return (
-    <div className="flex h-20 w-full flex-row items-center justify-between border-b border-gray-200 px-4">
-      <div className="flex w-3/4 flex-row items-center justify-start">
-        <div className="flex w-2/3 flex-col items-start justify-center">
-          <span className="text-sm font-semibold text-gray-700">
-            {product.name}
-          </span>
-          <span className="text-xs font-medium text-gray-500">
-            {product.price} € x {product.quantity}
-          </span>
-        </div>
-        <div className="flex w-1/3 flex-row items-center justify-end"></div>
+    <div className="mb-2 flex h-20 w-full flex-row items-center">
+      <img
+        src={product.image}
+        alt="placeholder"
+        className="mr-4 h-16 w-16 rounded-md"
+      />
+      <div className="items-strech flex h-full flex-col justify-start">
+        <h5 className="text-md mb-2 font-bold line-clamp-1">{product.name}</h5>
+        <p className="text-sm font-bold text-blue-800">{product.price}€</p>
+      </div>
+      <div className="ml-auto flex flex-row items-center justify-center">
+        <button
+          onClick={() => drecreaseProductQuantity(product)}
+          disabled={product.quantity <= 1}
+          className={`${
+            product.quantity <= 1
+              ? 'cursor-not-allowed opacity-50'
+              : 'cursor-pointer'
+          }`}
+        >
+          <MinusCircleIcon className={`h-6 w-6 text-blue-900`} />
+        </button>
+
+        <p className="w-8 text-center">{product.quantity}</p>
+        <PlusCircleIcon
+          className="h-6 w-6 text-blue-900"
+          onClick={() => increaseProductQuantity(product)}
+        />
       </div>
     </div>
   );

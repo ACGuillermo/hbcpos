@@ -9,19 +9,27 @@ export type ConfirmationDialogProps = {
   triggerButton: React.ReactElement;
   isDone?: boolean;
 };
+
+type PaymentMethod = 'creditCard' | 'cash' | '';
 export const CheckoutModal = ({
   triggerButton,
   isDone = false,
 }: ConfirmationDialogProps) => {
   const { close, open, isOpen } = useDisclosure();
+  const [paymentMethod, setPaymentMethod] = React.useState<PaymentMethod>('');
 
-  const addButtonRef = React.useRef(null);
+  const continueButtonRef = React.useRef(null);
 
   React.useEffect(() => {
     if (isDone) {
       close();
     }
   }, [isDone, close]);
+
+  const resetOnClose = () => {
+    setPaymentMethod('');
+    close();
+  };
 
   const trigger = React.cloneElement(triggerButton, {
     onClick: open,
@@ -32,8 +40,8 @@ export const CheckoutModal = ({
       {trigger}
       <Dialog
         isOpen={isOpen}
-        onClose={close}
-        initialFocus={addButtonRef}
+        onClose={resetOnClose}
+        initialFocus={continueButtonRef}
         className="max-w-lg sm:w-1/2 lg:w-2/5"
       >
         <div className="w-full">
@@ -55,6 +63,8 @@ export const CheckoutModal = ({
             {/* TODO: re-style and extrack to re-usable component */}
             <label className="inline-flex items-center rounded-full  border-gray-200 border-opacity-60 px-2 py-2">
               <input
+                onChange={(e) => setPaymentMethod('creditCard')}
+                checked={paymentMethod === 'creditCard'}
                 type="radio"
                 className="form-radio h-5 w-5 text-indigo-600"
                 name="paymentMethod"
@@ -68,6 +78,8 @@ export const CheckoutModal = ({
 
             <label className="mt-4 inline-flex items-center rounded-full border-gray-200 border-opacity-60 px-2 py-2">
               <input
+                onChange={(e) => setPaymentMethod('cash')}
+                checked={paymentMethod === 'cash'}
                 type="radio"
                 className="form-radio h-5 w-5 text-indigo-600"
                 name="paymentMethod"
@@ -80,12 +92,13 @@ export const CheckoutModal = ({
 
           <div className="mt-8 w-full">
             <Button
+              disabled={paymentMethod === ''}
               type="button"
               variant="primary"
               size="lg"
               className="inline-flex w-full justify-center rounded-md border focus:ring-1 focus:ring-indigo-500 focus:ring-offset-1 sm:mt-0  sm:text-sm"
               onClick={close}
-              ref={addButtonRef}
+              ref={continueButtonRef}
             >
               Continuar
             </Button>

@@ -11,7 +11,7 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(
   ({ product, increaseProductQuantity }) => {
     return (
       <div
-        className="flex w-48 flex-col justify-center rounded-md border-[1px] border-black border-opacity-20 bg-white p-2 align-middle shadow-xl hover:cursor-pointer xl:w-64 2xl:w-72"
+        className="mx-auto flex w-48 flex-col justify-center rounded-md border-[1px] border-black border-opacity-20 bg-white p-2 align-middle shadow-xl hover:cursor-pointer lg:w-36 xl:w-48 2xl:w-64"
         onClick={() => increaseProductQuantity(product)}
       >
         <Image

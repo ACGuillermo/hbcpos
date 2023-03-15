@@ -10,6 +10,7 @@ interface CartBillProps {
 
 export const CartBill: React.FC<CartBillProps> = ({ cartProducts }) => {
   const [subtotal, setSubtotal] = useState(0);
+  const [paymentMethod, setPaymentMethod] = useState('');
 
   useEffect(() => {
     setSubtotal(
@@ -41,6 +42,7 @@ export const CartBill: React.FC<CartBillProps> = ({ cartProducts }) => {
             {subtotal.toFixed(2)} €
           </p>
         </div>
+
         <div className="-mt-2 flex h-10 items-center rounded-md">
           <CheckoutModal
             isDone={false}
@@ -56,31 +58,6 @@ export const CartBill: React.FC<CartBillProps> = ({ cartProducts }) => {
             }
           />
         </div>
-        <ConfirmationModal
-          title="Empty Cart"
-          isDone={false}
-          body={'Are you sure you want to empty your cart?'}
-          triggerButton={
-            <Button
-              variant="danger"
-              size="md"
-              className="w-full"
-              disabled={cartProducts.length <= 0}
-            >
-              Empty Cart
-            </Button>
-          }
-          confirmButton={
-            <Button
-              variant="danger"
-              size="md"
-              disabled={cartProducts.length <= 0}
-            >
-              Empty Cart
-            </Button>
-          }
-          icon="danger"
-        />
       </div>
     </div>
   );

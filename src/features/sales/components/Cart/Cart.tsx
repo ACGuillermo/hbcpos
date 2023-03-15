@@ -14,6 +14,7 @@ export const Cart = () => {
     deleteCart();
     setIsDone(true);
   };
+
   return (
     <div className="col-span-3 h-full overflow-y-hidden rounded-2xl border-2 border-gray-200 lg:col-span-3">
       <div className="flex h-full w-full flex-col rounded-2xl bg-white shadow-lg">
@@ -31,13 +32,17 @@ export const Cart = () => {
             body={'Are you sure you want to empty your cart?'}
             triggerButton={
               <button
+                disabled={cartProducts.length < 1}
                 className={`${
                   cartProducts.length < 1
                     ? 'cursor-not-allowed opacity-50'
                     : 'cursor-pointer'
                 }`}
               >
-                <TrashIcon className="h-6 w-6 text-red-500" />
+                <TrashIcon
+                  onClick={() => setIsDone(false)}
+                  className="h-6 w-6 text-red-500"
+                />
               </button>
             }
             confirmButton={

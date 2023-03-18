@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Button } from '~/components/Elements';
-import { ConfirmationModal } from '~/components/Elements/ConfirmationModal';
 import { type CartProduct } from '~/types';
 import { CheckoutModal } from './CheckoutModal';
 
